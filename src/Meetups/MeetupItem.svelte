@@ -1,10 +1,13 @@
 <script>
+import Button from '../UI/Button.svelte'
+
 export let title
 export let subtitle
 export let imageUrl
 export let description
 export let address
 export let email
+
 
 </script>
 
@@ -26,10 +29,13 @@ export let email
   </body>
 
   <footer>
-    <a href="mailto:{email}">Contact</a>
-    <button>show details</button>
+    <Button classType="outline" href="mailto:{email}" caption="contact" />
+    <!-- <a href="mailto:{email}">Contact</a> -->
+    <Button classType="" caption="show details" />
+    <Button classType="success" caption="favorite" />
+    <!-- <button>show details</button>
     <button>favorite</button>
-    
+     -->
   </footer>
   
 </article>

@@ -2,7 +2,7 @@
 	// Modules
 	import Header from './UI/Header.svelte'
 	import TextInput from './UI/TextInput.svelte'
-	
+	import Button from './UI/Button.svelte'
 	import MeetupGrid from './Meetups/MeetupGrid.svelte'
 
 	// Variables
@@ -15,15 +15,6 @@
 	let imageUrl = ""
 	let email = ""
 	let address = ""
-	
-	// const meetup = {
-	// 	// title: title, 
-	// 	// subtitle: , 
-	// 	// imageUrl: , 
-	// 	// description: , 
-	// 	// contactEmail: , 
-	// 	// adress: 
-	// }
 		
 	let meetups = [
 		{
@@ -81,7 +72,8 @@
 		<TextInput type="text" on:input={event => (imageUrl = event.target.value)} label="Image path" id={imageUrl} />
 		<TextInput type="text" on:input={event => (description = event.target.value)} label="Description" id={description} controlType="textarea" />
 		<TextInput type="email" on:input={event => (email = event.target.value)} label="Email" id={email} />
-		<button type="submit" >Send</button>
+		<!-- <button type="submit" >Send</button> -->
+		<Button classType="success outline" type="submit" caption="submit" />
 
 	</form>
 	<MeetupGrid {meetups} />
