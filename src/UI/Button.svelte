@@ -4,10 +4,15 @@ export let caption
 export let classType
 export let href
 </script>
-
+{#if href} 
 <button class={classType} href={href} type={type}>
-{caption.toUpperCase()}
+  {caption.toUpperCase()}
 </button>
+{:else}
+<button class={classType} type={type}>
+  {caption.toUpperCase()}
+</button>
+{/if}
 
 <style>
 button,
