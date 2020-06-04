@@ -1,7 +1,7 @@
 <script>
-	import Header from './Header.svelte'
+	import Header from './UI/Header.svelte'
 	
-	export let name;
+	// export let name;
 	export let mainTitle;
 	$: console.log('welcome!')
 </script>

@@ -3,7 +3,7 @@ export let title
 </script>
 
 <header>
-  <h1>Welcome to {title.toUpperCase()}.</h1>
+  <h1>Welcome to Meetups</h1>
 </header>
 
 <style>
