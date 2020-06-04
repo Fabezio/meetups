@@ -1,11 +1,31 @@
 <script>
 	// Modules
 	import Header from './UI/Header.svelte'
-	import MeetupItem from './Meetups/MeetupItem.svelte'
+	import TextInput from './UI/TextInput.svelte'
+	
+	import MeetupGrid from './Meetups/MeetupGrid.svelte'
 
 	// Variables
 	export let mainTitle;
-	const meetups = [
+	let primaryKey = 0
+
+	let title = ""
+	let subtitle = ""
+	let description = ""
+	let imageUrl = ""
+	let email = ""
+	let address = ""
+	
+	// const meetup = {
+	// 	// title: title, 
+	// 	// subtitle: , 
+	// 	// imageUrl: , 
+	// 	// description: , 
+	// 	// contactEmail: , 
+	// 	// adress: 
+	// }
+		
+	let meetups = [
 		{
 			id: 'm1',
 			title: 'Hello!',
@@ -19,12 +39,29 @@
 			id: 'm2',
 			title: 'Hey everybody',
 			subtitle: 'Django is better',
-			description: 'If you seek a backend framework, puthon is made for that, choose Django',
+			description: 'If you seek a backend framework based on python, choose Django',
 			imageUrl: 'https://humancoders-formations.s3.amazonaws.com/uploads/course/logo/3/formation-django.png',
 			address: 'Monty street',
 			contactEmail: 'unchained-development@outlook.us'
 		}
 	]
+
+	// Functions:
+	function addMeetup() {
+		primaryKey += 1
+		const newMeetup = {
+			id: primaryKey.toString(),
+			title, 
+			subtitle, 
+			description, 
+			imageUrl, 
+			address, 
+			contactEmail: email
+		}
+		
+		meetups = [...meetups, newMeetup]
+	}
+	
 
 	// Reactivity
 	$: console.log('welcome!')
@@ -34,35 +71,31 @@
 	<title>{mainTitle}</title>
 </svelte:head>
 
-<main>
-	<Header title={mainTitle} />
+<Header title={mainTitle} />
 
-	<section id="meetups">
-	{#each meetups as meetup}
-		<MeetupItem data={meetup} />
-	{/each}
-	</section>
+<main>
+	<form on:submit|preventDefault={addMeetup}>
+		<TextInput type="text" on:input={event => (title = event.target.value)} label="Title" id={title} />
+		<TextInput type="text" on:input={event => (subtitle = event.target.value)} label="Subtitle" id={subtitle} />
+		<TextInput type="text" on:input={event => (address = event.target.value)} label="Address" id={address} />
+		<TextInput type="text" on:input={event => (imageUrl = event.target.value)} label="Image path" id={imageUrl} />
+		<TextInput type="text" on:input={event => (description = event.target.value)} label="Description" id={description} controlType="textarea" />
+		<TextInput type="email" on:input={event => (email = event.target.value)} label="Email" id={email} />
+		<button type="submit" >Send</button>
+
+	</form>
+	<MeetupGrid {meetups} />
 </main>
 
 <style>
 	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
+		padding: 3em;
+		/* max-width: 240px; */
+		margin: 3 auto;
+	}
+
+	form {
+		margin-top: 3em;
 	}
 	
-
-	#meetups {
-		margin: 5em;
-	}
-
-	
-
-
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
-	}
 </style>

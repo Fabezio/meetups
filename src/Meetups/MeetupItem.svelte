@@ -1,27 +1,32 @@
 <script>
-export let data
+export let title
+export let subtitle
+export let imageUrl
+export let description
+export let address
+export let email
 
 </script>
 
 <article>
   <header>
-    <h1 class="">{data.title}</h1>
-    <h2>{data.subtitle}</h2>
+    <h1 class="">{title}</h1>
+    <h2>{subtitle}</h2>
+    <p>{address}</p>
   </header> 
 
   <body>
     <div class="image">
-      <img src={data.imageUrl} alt={data.title}>
+      <img src={imageUrl} alt={title}>
     </div>
     <div class="content">
-      <div>{data.description}</div>
-      <div>email: {data.contactEmail}</div>
-      <div>{data.address}</div>
+      <p>{description}</p>
     </div>
     
   </body>
 
   <footer>
+    <a href="mailto:{email}">Contact</a>
     <button>show details</button>
     <button>favorite</button>
     
