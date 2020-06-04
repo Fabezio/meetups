@@ -1,8 +1,32 @@
 <script>
+	// Modules
 	import Header from './UI/Header.svelte'
-	
-	// export let name;
+	import MeetupItem from './Meetups/MeetupItem.svelte'
+
+	// Variables
 	export let mainTitle;
+	const meetups = [
+		{
+			id: 'm1',
+			title: 'Hello!',
+			subtitle: 'Learn to code quickly',
+			description: 'Because time is money, you will need to know how to to be reaaaally efficiency',
+			imageUrl: 'https://th.bing.com/th/id/OIP.6KmniewXDmmYxJRysPRDvAHaI6?pid=Api&w=149.4809688581315&h=180&c=7&dpr=1,3',
+			address: '0001 CodeJS Road, MIT',
+			contactEmail: 'max.academind@dev-svelte.info'
+		},
+		{
+			id: 'm2',
+			title: 'Hey everybody',
+			subtitle: 'Django is better',
+			description: 'If you seek a backend framework, puthon is made for that, choose Django',
+			imageUrl: 'https://humancoders-formations.s3.amazonaws.com/uploads/course/logo/3/formation-django.png',
+			address: 'Monty street',
+			contactEmail: 'unchained-development@outlook.us'
+		}
+	]
+
+	// Reactivity
 	$: console.log('welcome!')
 </script>
 
@@ -12,7 +36,12 @@
 
 <main>
 	<Header title={mainTitle} />
-	
+
+	<section id="meetups">
+	{#each meetups as meetup}
+		<MeetupItem data={meetup} />
+	{/each}
+	</section>
 </main>
 
 <style>
@@ -24,11 +53,9 @@
 	}
 	
 
-	/* section {
-		position: absolute; 
-		top: 0;
-
-	} */
+	#meetups {
+		margin: 5em;
+	}
 
 	
 
