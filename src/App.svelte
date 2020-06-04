@@ -1,4 +1,6 @@
 <script>
+	import Header from './Header.svelte'
+	
 	export let name;
 	export let mainTitle;
 	$: console.log('welcome!')
@@ -9,9 +11,7 @@
 </svelte:head>
 
 <main>
-	<header>
-		<h1>Welcome to {mainTitle.toUpperCase()}.</h1>
-	</header>
+	<Header title={mainTitle} />
 	
 </main>
 
@@ -22,18 +22,7 @@
 		max-width: 240px;
 		margin: 0 auto;
 	}
-	header {
-		position: fixed;
-		width: 100%;
-		top: 0;
-		left: 0;
-		height: 4em;
-		background: #cf0056;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		box-shadow: 0 2px 6px rgba(0,0,0,0.26);
-	}
+	
 
 	/* section {
 		position: absolute; 
@@ -41,13 +30,7 @@
 
 	} */
 
-	h1 {
-		/* color: #ff3e00; */
-		/* text-transform: uppercase; */
-		font-variant: small-caps;
-		/* font-size: 4em; */
-		font-weight: 300;
-	}
+	
 
 
 	@media (min-width: 640px) {
