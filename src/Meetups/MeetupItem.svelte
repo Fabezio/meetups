@@ -76,7 +76,7 @@ const dispatch = createEventDispatcher()
     font-size: 1.25rem;
     margin: 0.5rem 0;
     padding-top: 0.25em;
-    Npadding-bottom: 0.25em;
+    padding-bottom: 0.25em;
     font-family: "Roboto Slab", sans-serif;
   }
 
