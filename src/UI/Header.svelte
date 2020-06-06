@@ -24,7 +24,7 @@ header {
 
 h1 {
 	color: white;
-	font-family: 'Roboto Slab', sans-serif;
+	font-family: 'Lato', sans-serif;
 	font-variant: small-caps;
 	margin: 0;
 }
