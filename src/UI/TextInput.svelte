@@ -1,7 +1,7 @@
 <script>
   export let id
   export let label
-  export let controlType = null
+  export let controlType = "input"
   
 </script>
 

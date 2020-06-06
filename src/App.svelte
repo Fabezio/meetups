@@ -21,19 +21,21 @@
 			id: 'm1',
 			title: 'Hello!',
 			subtitle: 'Learn to code quickly',
-			description: 'Because time is money, you will need to know how to to be reaaaally efficiency',
+			description: 'Because time is money, you will need to learn to be reaaaally efficiency',
 			imageUrl: 'https://th.bing.com/th/id/OIP.6KmniewXDmmYxJRysPRDvAHaI6?pid=Api&w=149.4809688581315&h=180&c=7&dpr=1,3',
 			address: '0001 CodeJS Road, MIT',
-			contactEmail: 'max.academind@dev-svelte.info'
+			contactEmail: 'max.academind@dev-svelte.info',
+			isFavorite: false
 		},
 		{
 			id: 'm2',
-			title: 'Hey everybody',
+			title: 'Pssst',
 			subtitle: 'Django is better',
-			description: 'If you seek a backend framework based on python, choose Django',
+			description: 'If you seek a backend webdev framework, Django is really cool!',
 			imageUrl: 'https://humancoders-formations.s3.amazonaws.com/uploads/course/logo/3/formation-django.png',
 			address: 'Monty street',
-			contactEmail: 'unchained-development@outlook.us'
+			contactEmail: 'unchained-development@outlook.us',
+			isFavorite: false
 		}
 	]
 
@@ -51,6 +53,15 @@
 		}
 		
 		meetups = [...meetups, newMeetup]
+	}
+	function toggleFavorite(event) {
+		const id = event.detail
+		const updatedMeetup = {...meetups.find(el => el.id === id)}
+		updatedMeetup.isFavorite = !updatedMeetup.isFavorite
+		const meetupIndex = meetups.findIndex(el => el.id == id)
+		const updatedMeetups = [...meetups]
+		updatedMeetups[meetupIndex] = updatedMeetup
+		meetups = updatedMeetups
 	}
 	
 
@@ -70,11 +81,11 @@
 		<TextInput on:input={event => (subtitle = event.target.value)} label="Subtitle" id={subtitle} />
 		<TextInput on:input={event => (address = event.target.value)} label="Address" id={address} />
 		<TextInput on:input={event => (imageUrl = event.target.value)} label="Image path" id={imageUrl} />
+		<TextInput on:input={event => (email = event.target.value)} label="Email" id={email} controlType="email" />
 		<TextInput on:input={event => (description = event.target.value)} label="Description" id={description} controlType="textarea" />
-		<TextInput on:input={event => (email = event.target.value)} label="Email" id={email} controlType="textarea" />
 		<Button classType="success outline" type="submit" caption="submit" />
 	</form>
-	<MeetupGrid {meetups} />
+	<MeetupGrid {meetups} on:toggle-favorite={toggleFavorite} />
 </main>
 
 <style>

@@ -7,12 +7,15 @@ import MeetupItem from './MeetupItem.svelte'
 <section id="meetups">
   {#each meetups as meetup}
     <MeetupItem 
+      on:toggle-favorite
+      id={meetup.id}
       title={meetup.title} 
       subtitle={meetup.subtitle} 
       description={meetup.description} 
       imageUrl={meetup.imageUrl} 
       address={meetup.address} 
       email={meetup.contactEmail} 
+      isFav={meetup.isFavorite}
     />
   {/each}
 </section>

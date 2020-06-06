@@ -1,19 +1,23 @@
 <script>
+import { createEventDispatcher } from 'svelte'
 import Button from '../UI/Button.svelte'
 
+export let id
 export let title
 export let subtitle
 export let imageUrl
 export let description
 export let address
 export let email
+export let isFav
+const dispatch = createEventDispatcher()
 
 
 </script>
 
 <article>
   <header>
-    <h1 class="">{title}</h1>
+    <h1 class:is-favorite={isFav}>{title}</h1>
     <h2>{subtitle}</h2>
     <p>{address}</p>
   </header> 
@@ -29,10 +33,15 @@ export let email
   </body>
 
   <footer>
-    <Button classType="outline" href="mailto:{email}" caption="contact" />
+    <Button classType="success" href="mailto:{email}" caption="contact" />
     <!-- <a href="mailto:{email}">Contact</a> -->
     <Button classType="" caption="show details" />
-    <Button classType="success" caption="favorite" />
+    <Button 
+      classType="outline" 
+      caption="{isFav ? 'unfavorite' :'favorite' } "
+
+      on:click={() => dispatch('toggle-favorite', id)} 
+    />
   </footer>
   
 </article>
@@ -62,16 +71,18 @@ export let email
     object-fit: cover;
   }
 
+  h1, h2, p {padding-left: 0.5rem;}
   h1 {
     font-size: 1.25rem;
     margin: 0.5rem 0;
+    padding-top: 0.25em;
+    Npadding-bottom: 0.25em;
     font-family: "Roboto Slab", sans-serif;
   }
 
   h1.is-favorite {
     background: #01a129;
     color: white;
-    padding: 0 0.5rem;
     border-radius: 5px;
   }
 
