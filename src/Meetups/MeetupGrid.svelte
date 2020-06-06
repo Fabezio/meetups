@@ -19,7 +19,7 @@ import MeetupItem from './MeetupItem.svelte'
 
 <style>
 #meetups {
-		margin: 5em;
+		/* margin: 0 5em; */
 	}
 
 section {
@@ -32,7 +32,7 @@ section {
 
 @media (min-width: 768px) {
   section {
-    /* grid-gap: 0; */
+    grid-gap: 0;
     grid-template-columns: repeat(2, 1fr);
   }
 }

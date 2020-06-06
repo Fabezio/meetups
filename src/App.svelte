@@ -81,13 +81,14 @@
 
 <style>
 	main {
-		padding: 3em;
+		/* padding: 3em; */
 		/* max-width: 240px; */
 		margin: 3 auto;
 	}
 
 	form {
-		margin-top: 3em;
+		margin: 5em auto 0;
+		width: 90%;
 	}
 	
 </style>
