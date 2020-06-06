@@ -3,6 +3,8 @@
 	import Header from './UI/Header.svelte'
 	import TextInput from './UI/TextInput.svelte'
 	import Button from './UI/Button.svelte'
+	
+
 	import MeetupGrid from './Meetups/MeetupGrid.svelte'
 
 	// Variables
@@ -85,6 +87,7 @@
 		<TextInput on:input={event => (description = event.target.value)} label="Description" id={description} controlType="textarea" />
 		<Button classType="success outline" type="submit" caption="submit" />
 	</form>
+	
 	<MeetupGrid {meetups} on:toggle-favorite={toggleFavorite} />
 </main>
 

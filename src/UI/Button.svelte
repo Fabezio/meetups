@@ -1,16 +1,17 @@
 <script>
   export let caption
-  export let classType
+  export let mode = null
+  export let color = null
   export let type = null
   export let href = null
 </script>
 
 {#if href} 
-<a class={classType} href={href} type={type}>
+<a href={href} type={type}>
   {caption.toUpperCase()}
 </a>
 {:else}
-<button class={classType} type={type} on:click>
+<button class="{mode} {color}" type={type} on:click>
   {caption.toUpperCase()}
 </button>
 {/if}
