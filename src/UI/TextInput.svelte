@@ -1,22 +1,19 @@
 <script>
-  // import {createEventDispatcher} from 'svelte'
   export let id
   export let label
-  // export let type
-  export let controlType
+  export let controlType = null
   
 </script>
 
-<!-- <div>TextInput compo</div> -->
 <div class="form-control">
   <label for={id}>{label}: </label>
-{#if controlType == 'textarea'}
+  {#if controlType == 'textarea'}
   <textarea type="text" rows="3"  id={id} bind:value={id} on:input />
-{:else if controlType == 'email'}
+  {:else if controlType == 'email'}
   <input type="email" id={label} bind:value={id} on:input />
-{:else}
+  {:else}
   <input type="text" id={label} bind:value={id} on:input />
-{/if}
+  {/if}
 </div>
 
 <style>

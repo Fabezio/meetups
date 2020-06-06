@@ -66,23 +66,19 @@
 
 <main>
 	<form on:submit|preventDefault={addMeetup}>
-		<TextInput type="text" on:input={event => (title = event.target.value)} label="Title" id={title} />
-		<TextInput type="text" on:input={event => (subtitle = event.target.value)} label="Subtitle" id={subtitle} />
-		<TextInput type="text" on:input={event => (address = event.target.value)} label="Address" id={address} />
-		<TextInput type="text" on:input={event => (imageUrl = event.target.value)} label="Image path" id={imageUrl} />
-		<TextInput type="text" on:input={event => (description = event.target.value)} label="Description" id={description} controlType="textarea" />
-		<TextInput type="email" on:input={event => (email = event.target.value)} label="Email" id={email} />
-		<!-- <button type="submit" >Send</button> -->
+		<TextInput on:input={event => (title = event.target.value)} label="Title" id={title} />
+		<TextInput on:input={event => (subtitle = event.target.value)} label="Subtitle" id={subtitle} />
+		<TextInput on:input={event => (address = event.target.value)} label="Address" id={address} />
+		<TextInput on:input={event => (imageUrl = event.target.value)} label="Image path" id={imageUrl} />
+		<TextInput on:input={event => (description = event.target.value)} label="Description" id={description} controlType="textarea" />
+		<TextInput on:input={event => (email = event.target.value)} label="Email" id={email} controlType="textarea" />
 		<Button classType="success outline" type="submit" caption="submit" />
-
 	</form>
 	<MeetupGrid {meetups} />
 </main>
 
 <style>
 	main {
-		/* padding: 3em; */
-		/* max-width: 240px; */
 		margin: 3 auto;
 	}
 

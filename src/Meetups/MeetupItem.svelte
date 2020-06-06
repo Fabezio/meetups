@@ -33,14 +33,9 @@ export let email
     <!-- <a href="mailto:{email}">Contact</a> -->
     <Button classType="" caption="show details" />
     <Button classType="success" caption="favorite" />
-    <!-- <button>show details</button>
-    <button>favorite</button>
-     -->
   </footer>
   
 </article>
-
-
 
 <style>
   article {

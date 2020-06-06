@@ -1,9 +1,10 @@
 <script>
-export let type
 export let caption
 export let classType
-export let href
+export let type = null
+export let href = null
 </script>
+
 {#if href} 
 <button class={classType} href={href} type={type}>
   {caption.toUpperCase()}
