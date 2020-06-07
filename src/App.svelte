@@ -1,23 +1,14 @@
 <script>
 	// Modules
 	import Header from './UI/Header.svelte'
-	import TextInput from './UI/TextInput.svelte'
 	import Button from './UI/Button.svelte'
-	
-
 	import MeetupGrid from './Meetups/MeetupGrid.svelte'
+	import EditMeetup from './Meetups/EditMeetup.svelte'
 
 	// Variables
 	export let mainTitle;
 	let primaryKey = 0
 
-	let title = ""
-	let subtitle = ""
-	let description = ""
-	let imageUrl = ""
-	let email = ""
-	let address = ""
-		
 	let meetups = [
 		{
 			id: 'm1',
@@ -40,21 +31,23 @@
 			isFavorite: false
 		}
 	]
+	let editMode
 
 	// Functions:
-	function addMeetup() {
+	function addMeetup(event) {
 		primaryKey += 1
 		const newMeetup = {
 			id: primaryKey.toString(),
-			title, 
-			subtitle, 
-			description, 
-			imageUrl, 
-			address, 
-			contactEmail: email
+			title: event.detail.title, 
+			subtitle: event.detail.subtitle, 
+			description: event.detail.description, 
+			imageUrl: event.detail.imageUrl, 
+			address: event.detail.address, 
+			contactEmail: event.detail.email
 		}
 		
 		meetups = [...meetups, newMeetup]
+		editMode = null
 	}
 	function toggleFavorite(event) {
 		const id = event.detail
@@ -78,27 +71,27 @@
 <Header title={mainTitle} />
 
 <main>
-	<form on:submit|preventDefault={addMeetup}>
-		<TextInput on:input={event => (title = event.target.value)} label="Title" id={title} />
-		<TextInput on:input={event => (subtitle = event.target.value)} label="Subtitle" id={subtitle} />
-		<TextInput on:input={event => (address = event.target.value)} label="Address" id={address} />
-		<TextInput on:input={event => (imageUrl = event.target.value)} label="Image path" id={imageUrl} />
-		<TextInput on:input={event => (email = event.target.value)} label="Email" id={email} controlType="email" />
-		<TextInput on:input={event => (description = event.target.value)} label="Description" id={description} controlType="textarea" />
-		<Button classType="success outline" type="submit" caption="submit" />
-	</form>
-	
+	<div class="meetup-controls">
+		<Button on:click={() => editMode = 'add' } caption="new Meetup" /> 
+	</div>
+	{#if editMode === 'add'}
+	<EditMeetup  on:save={addMeetup} />
+	{:else}
 	<MeetupGrid {meetups} on:toggle-favorite={toggleFavorite} />
+	{/if}
+	
 </main>
 
 <style>
 	main {
-		margin: 3 auto;
+		margin: 5em auto;
+	}
+	.meetup-controls {
+		width: 100%;
+
+		margin: O auto;
 	}
 
-	form {
-		margin: 5em auto 0;
-		width: 90%;
-	}
+	
 	
 </style>
