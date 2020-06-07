@@ -2,14 +2,14 @@
 	// Modules
 	import Header from './UI/Header.svelte'
 	import Button from './UI/Button.svelte'
-	import MeetupGrid from './Meetups/MeetupGrid.svelte'
-	import EditMeetup from './Meetups/EditMeetup.svelte'
+	import CodeupGrid from './Codeups/CodeupGrid.svelte'
+	import EditCodeup from './Codeups/EditCodeup.svelte'
 
 	// Variables
 	export let mainTitle;
 	let primaryKey = 0
 
-	let meetups = [
+	let codeups = [
 		{
 			id: 'm1',
 			title: 'Hello!',
@@ -34,9 +34,9 @@
 	let editMode
 
 	// Functions:
-	function addMeetup(event) {
+	function addCodeup(event) {
 		primaryKey += 1
-		const newMeetup = {
+		const newCodeup = {
 			id: primaryKey.toString(),
 			title: event.detail.title, 
 			subtitle: event.detail.subtitle, 
@@ -46,17 +46,17 @@
 			contactEmail: event.detail.email
 		}
 		
-		meetups = [...meetups, newMeetup]
+		codeups = [...codeups, newCodeup]
 		editMode = null
 	}
 	function toggleFavorite(event) {
 		const id = event.detail
-		const updatedMeetup = {...meetups.find(el => el.id === id)}
-		updatedMeetup.isFavorite = !updatedMeetup.isFavorite
-		const meetupIndex = meetups.findIndex(el => el.id == id)
-		const updatedMeetups = [...meetups]
-		updatedMeetups[meetupIndex] = updatedMeetup
-		meetups = updatedMeetups
+		const updatedCodeup = {...codeups.find(el => el.id === id)}
+		updatedCodeup.isFavorite = !updatedCodeup.isFavorite
+		const codeupIndex = codeups.findIndex(el => el.id == id)
+		const updatedCodeups = [...codeups]
+		updatedCodeups[codeupIndex] = updatedCodeup
+		codeups = updatedCodeups
 	}
 	
 
@@ -71,14 +71,16 @@
 <Header title={mainTitle} />
 
 <main>
-	<div class="meetup-controls">
-		<Button on:click={() => editMode = 'add' } caption="new Meetup" /> 
+	<div id="codeup-controls">
+		<Button on:click={() => editMode = 'add' }>new codeup</Button>
 	</div>
+	<section>
 	{#if editMode === 'add'}
-	<EditMeetup  on:save={addMeetup} />
+	<EditCodeup  on:save={addCodeup} />
 	{:else}
-	<MeetupGrid {meetups} on:toggle-favorite={toggleFavorite} />
+	<CodeupGrid {codeups} on:toggle-favorite={toggleFavorite} />
 	{/if}
+	</section>
 	
 </main>
 
@@ -86,10 +88,14 @@
 	main {
 		margin: 5em auto;
 	}
-	.meetup-controls {
+	#codeup-controls {
 		width: 100%;
-
+		display: block;
 		margin: O auto;
+		text-align: center;
+	}
+	section {
+		overflow-y: scroll;
 	}
 
 	

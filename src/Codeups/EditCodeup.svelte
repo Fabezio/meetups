@@ -31,7 +31,7 @@
   <TextInput on:input={event => (imageUrl = event.target.value)} label="Image path" id={imageUrl} />
   <TextInput on:input={event => (email = event.target.value)} label="Email" id={email} controlType="email" />
   <TextInput on:input={event => (description = event.target.value)} label="Description" id={description} controlType="textarea" />
-  <Button classType="success outline" type="submit" caption="submit" />
+  <Button classType="success outline" type="submit" >Send</Button>
 </form>
 
 <style>

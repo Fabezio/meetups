@@ -53,16 +53,16 @@ $: {let words = description.split(' ')
   </body>
 
   <footer>
-    <Button href="mailto:{email}" caption="contact" />
+    <Button href="mailto:{email}" >contact</Button>
     <!-- <a href="mailto:{email}">Contact</a> -->
-    <Button caption="show details" />
+    <Button >show details</Button>
     <Button 
       mode="outline"
       color={isFav ? null : 'success'}
-      caption="{isFav ? 'unfavorite' :'favorite' } "
-
       on:click={() => dispatch('toggle-favorite', id)} 
-    />
+    >
+      {isFav ? 'unfavorite' :'favorite' }
+    </Button>
   </footer>
   
 </article>
@@ -76,10 +76,10 @@ $: {let words = description.split(' ')
     margin: 1rem;
   }
   
-  .meetup {
+  /* .codeup {
     grid-column: 1;
     grid-row: 1;
-  }
+  } */
 
   header,
   .content,

@@ -1,5 +1,5 @@
 <script>
-  export let caption
+  // export let captio÷n
   export let mode = null
   export let color = null
   export let type = null
@@ -8,11 +8,11 @@
 
 {#if href} 
 <a href={href} type={type}>
-  {caption.toUpperCase()}
+  <slot />
 </a>
 {:else}
 <button class="{mode} {color}" type={type} on:click>
-  {caption.toUpperCase()}
+  <slot />
 </button>
 {/if}
 
@@ -28,6 +28,7 @@
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.26);
     cursor: pointer;
     text-decoration: none;
+    text-transform: uppercase;
   }
 
   button:focus {
