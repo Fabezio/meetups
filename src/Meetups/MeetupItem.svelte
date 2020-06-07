@@ -13,15 +13,30 @@ export let email
 export let isFav
 const dispatch = createEventDispatcher()
 
+function descLengthHandle() {
+  const wordLength = 10
+  description.split(' ')
+  console.log(description.length)
+  return description
+}
+
+$: {let words = description.split(' ')
+    const nb = 20
+    if (words.length > nb){
+    words.length = nb
+    description = words.join(' ') + ' ...'}
+
+  console.log(words.length)}
+
 
 </script>
 
-<article>
+<article class="">
   <header>
     <h1 >
       {title}
       {#if isFav}
-      <Badge>FAVORITE</Badge>
+      <Badge>&hearts;</Badge>
       {/if}
     </h1>
     <h2>{subtitle}</h2>
@@ -35,8 +50,6 @@ const dispatch = createEventDispatcher()
     <div class="content">
       <p>{description}</p>
     </div>
-    
-  
   </body>
 
   <footer>
@@ -55,11 +68,17 @@ const dispatch = createEventDispatcher()
 </article>
 
 <style>
+  :root{--h-border: 2px ridge rgba(0,0,0,0.05);}
   article {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
     border-radius: 5px;
     background: white;
     margin: 1rem;
+  }
+  
+  .meetup {
+    grid-column: 1;
+    grid-row: 1;
   }
 
   header,
@@ -67,10 +86,22 @@ const dispatch = createEventDispatcher()
   footer {
     padding: 1rem;
   }
+  .content {
+    /* float: right; */
+    min-height: 5rem;
+    overflow-y: scroll;
+  }
+
+  .content p {
+    text-align: right;
+  }
 
   .image {
     width: 100%;
     height: 14rem;
+    border-top: var(--h-border);
+    border-bottom: var(--h-border);
+    
   }
 
   .image img {
