@@ -20,13 +20,23 @@ function descLengthHandle() {
   return description
 }
 
+// $: {
+//     const nb = 100
+//     if (description.length > nb)
+//     {
+//     description.length = nb
+//     description += '...'}
+
+//     console.log(description.length)
+//   }
 $: {let words = description.split(' ')
     const nb = 20
     if (words.length > nb){
     words.length = nb
     description = words.join(' ') + ' ...'}
 
-  console.log(words.length)}
+    console.log(words.length)
+  }
 
 
 </script>

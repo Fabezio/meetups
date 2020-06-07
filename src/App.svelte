@@ -2,6 +2,7 @@
 	// Modules
 	import Header from './UI/Header.svelte'
 	import Button from './UI/Button.svelte'
+	import Modal from './UI/Modal.svelte'
 	import CodeupGrid from './Codeups/CodeupGrid.svelte'
 	import EditCodeup from './Codeups/EditCodeup.svelte'
 
@@ -58,6 +59,9 @@
 		updatedCodeups[codeupIndex] = updatedCodeup
 		codeups = updatedCodeups
 	}
+	function cancelEdit () {
+		editMode = null
+	}
 	
 
 	// Reactivity
@@ -76,7 +80,7 @@
 	</div>
 	<section>
 	{#if editMode === 'add'}
-	<EditCodeup  on:save={addCodeup} />
+	<EditCodeup  on:save={addCodeup} on:cancel={cancelEdit} />
 	{:else}
 	<CodeupGrid {codeups} on:toggle-favorite={toggleFavorite} />
 	{/if}
