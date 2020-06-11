@@ -30,7 +30,7 @@ function descLengthHandle() {
 //     console.log(description.length)
 //   }
 $: {let words = description.split(' ')
-    const nb = 20
+    const nb = 25
     if (words.length > nb){
     words.length = nb
     description = words.join(' ') + ' ...'}
@@ -99,7 +99,7 @@ $: {let words = description.split(' ')
   .content {
     /* float: right; */
     min-height: 5rem;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
   }
 
   .content p {
