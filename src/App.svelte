@@ -80,7 +80,7 @@
 	</div>
 	<section>
 	{#if editMode === 'add'}
-	<EditCodeup  on:save={addCodeup} on:cancel={cancelEdit} />
+	<EditCodeup on:save={addCodeup} on:cancel={cancelEdit} />
 	{:else}
 	<CodeupGrid {codeups} on:toggle-favorite={toggleFavorite} />
 	{/if}

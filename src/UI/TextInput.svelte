@@ -2,17 +2,25 @@
   export let id
   export let label
   export let controlType = "input"
+  export let valid = true
+  export let validityMessage = ''
+
+  // $: if (!id.length) valid = false
+  //    else valid = true
   
 </script>
 
 <div class="form-control">
   <label for={id}>{label}: </label>
   {#if controlType == 'textarea'}
-  <textarea type="text" rows="3"  id={id} bind:value={id} on:input />
+  <textarea class:invalid={!valid} type="text" rows="3"  id={id} bind:value={id} on:input />
   {:else if controlType == 'email'}
-  <input type="email" id={label} bind:value={id} on:input />
+  <input class:invalid={!valid} type="email" id={label} bind:value={id} on:input />
   {:else}
-  <input type="text" id={label} bind:value={id} on:input />
+  <input class:invalid={!valid} type="text" id={label} bind:value={id} on:input />
+  {/if}
+  {#if validityMessage && !valid}
+    <p class="error-msg">{validityMessage}</p>
   {/if}
 </div>
 
@@ -47,5 +55,24 @@ label {
   width: 100%;
   margin: 0.25rem 0;
 }
+
+.invalid {
+  border-radius: 3px;
+  border: 1.5px solid red;
+}
+.error-msg {
+  color: red;
+}
+.valid {
+  border-radius: 3px;
+  border: 1.5px solid green;
+}
+.success-msg {
+  color: green;
+}
+
+
+
+
 
 </style>
