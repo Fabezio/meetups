@@ -1,9 +1,12 @@
 <script>
-  export let id
+  export let value
   export let label
   export let controlType = "input"
   export let valid = true
   export let validityMessage = ''
+  
+  let touched = false
+  
 
   // $: if (!id.length) valid = false
   //    else valid = true
@@ -11,15 +14,15 @@
 </script>
 
 <div class="form-control">
-  <label for={id}>{label}: </label>
+  <label for={value}>{label}: </label>
   {#if controlType == 'textarea'}
-  <textarea class:invalid={!valid} type="text" rows="3"  id={id} bind:value={id} on:input />
+  <textarea class:invalid={!valid && touched} type="text" rows="3" bind:value on:input on:blur={() => touched = true } />
   {:else if controlType == 'email'}
-  <input class:invalid={!valid} type="email" id={label} bind:value={id} on:input />
+  <input class:invalid={!valid && touched} type="email" value={label} on:input on:blur={() => touched = true } />
   {:else}
-  <input class:invalid={!valid} type="text" id={label} bind:value={id} on:input />
+  <input class:invalvalue={!value && touched} type="text" value={label} on:input  on:blur={() => touched = true } />
   {/if}
-  {#if validityMessage && !valid}
+  {#if validityMessage && !valid && touched}
     <p class="error-msg">{validityMessage}</p>
   {/if}
 </div>
@@ -58,7 +61,7 @@ label {
 
 .invalid {
   border-radius: 3px;
-  border: 1.5px solid red;
+  background: rgba(255, 0,0, 0.25);
 }
 .error-msg {
   color: red;
