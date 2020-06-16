@@ -1,5 +1,6 @@
 <script>
 	// Modules
+	import loadedCodeups from './Codeups/codeup-store'
 	import Header from './UI/Header.svelte'
 	import Button from './UI/Button.svelte'
 	import Modal from './UI/Modal.svelte'
@@ -8,30 +9,31 @@
 
 	// Variables
 	export let mainTitle;
+	// let loadedCodeups
 	let primaryKey = 0
 
-	let codeups = [
-		{
-			id: 'm1',
-			title: 'Hello!',
-			subtitle: 'Learn to code quickly',
-			description: 'Because time is money, you will need to learn to be reaaaally efficiency',
-			imageUrl: 'https://th.bing.com/th/id/OIP.6KmniewXDmmYxJRysPRDvAHaI6?pid=Api&w=149.4809688581315&h=180&c=7&dpr=1,3',
-			address: '0001 CodeJS Road, MIT',
-			contactEmail: 'max.academind@dev-svelte.info',
-			isFavorite: false
-		},
-		{
-			id: 'm2',
-			title: 'Pssst',
-			subtitle: 'Django is better',
-			description: 'If you seek a backend webdev framework, Django is really cool!',
-			imageUrl: 'https://humancoders-formations.s3.amazonaws.com/uploads/course/logo/3/formation-django.png',
-			address: 'Monty street',
-			contactEmail: 'unchained-development@outlook.us',
-			isFavorite: false
-		}
-	]
+	// let codeups = [
+	// 	{
+	// 		id: 'm1',
+	// 		title: 'Hello!',
+	// 		subtitle: 'Learn to code quickly',
+	// 		description: 'Because time is money, you will need to learn to be reaaaally efficiency',
+	// 		imageUrl: 'https://th.bing.com/th/id/OIP.6KmniewXDmmYxJRysPRDvAHaI6?pid=Api&w=149.4809688581315&h=180&c=7&dpr=1,3',
+	// 		address: '0001 CodeJS Road, MIT',
+	// 		contactEmail: 'max.academind@dev-svelte.info',
+	// 		isFavorite: false
+	// 	},
+	// 	{
+	// 		id: 'm2',
+	// 		title: 'Pssst',
+	// 		subtitle: 'Django is better',
+	// 		description: 'If you seek a backend webdev framework, Django is really cool!',
+	// 		imageUrl: 'https://humancoders-formations.s3.amazonaws.com/uploads/course/logo/3/formation-django.png',
+	// 		address: 'Monty street',
+	// 		contactEmail: 'unchained-development@outlook.us',
+	// 		isFavorite: false
+	// 	}
+	// ]
 	let editMode
 
 	// Functions:
@@ -47,17 +49,17 @@
 			contactEmail: event.detail.email
 		}
 		
-		codeups = [...codeups, newCodeup]
+		loadedCodeups = [...loadedCodeups, newCodeup]
 		editMode = null
 	}
 	function toggleFavorite(event) {
 		const id = event.detail
-		const updatedCodeup = {...codeups.find(el => el.id === id)}
+		const updatedCodeup = {...loadedCodeups.find(el => el.id === id)}
 		updatedCodeup.isFavorite = !updatedCodeup.isFavorite
-		const codeupIndex = codeups.findIndex(el => el.id == id)
-		const updatedCodeups = [...codeups]
+		const codeupIndex = loadedCodeups.findIndex(el => el.id == id)
+		const updatedCodeups = [...loadedCodeups]
 		updatedCodeups[codeupIndex] = updatedCodeup
-		codeups = updatedCodeups
+		loadedCodeups = updatedCodeups
 	}
 	function cancelEdit () {
 		editMode = null
@@ -82,7 +84,7 @@
 	{#if editMode === 'add'}
 	<EditCodeup on:save={addCodeup} on:cancel={cancelEdit} />
 	{:else}
-	<CodeupGrid {codeups} on:toggle-favorite={toggleFavorite} />
+	<CodeupGrid codeups={$loadedCodeups} on:toggle-favorite={toggleFavorite} />
 	{/if}
 	</section>
 	
@@ -95,7 +97,7 @@
 	#codeup-controls {
 		width: 100%;
 		display: block;
-		margin: O auto;
+		/* margin: O auto; */
 		text-align: center;
 	}
 	section {

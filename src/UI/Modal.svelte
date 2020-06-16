@@ -32,7 +32,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,3/4);
+    background: rgba(0,0,0, 0.75);
     z-index: 10;
   }
   
@@ -64,7 +64,7 @@
   @media (min-width: 768px) {
     .modal {
       width: 40rem;
-      left: calc(50% - 20rem);
+      left: calc(50% - 2rem);
     }
   }
 </style>
