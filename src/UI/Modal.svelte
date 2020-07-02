@@ -38,9 +38,10 @@
   
   .modal {
     position: fixed;
+    /* margin: auto; */
     top: 10vh;
-    left: 10%;
-    width: 80%;
+    left: 20%;
+    width: 60%;
     max-height: 80vh;
     background: white;
     border-radius: 5px;
@@ -58,13 +59,14 @@
     margin: 0;
     border-bottom: 1px solid #ccc;
     font-family: 'Roboto Slab', sans-serif;
+    text-align: center;
   }
   
 
-  @media (min-width: 768px) {
+  /* @media (min-width: 768px) {
     .modal {
       width: 40rem;
       left: calc(50% - 2rem);
     }
-  }
+  } */
 </style>

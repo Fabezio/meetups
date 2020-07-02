@@ -1,7 +1,7 @@
 <!-- <h1>CodeupGrid</h1> -->
 <script>
-export let codeups
-import CodeupItem from './CodeupItem.svelte'
+  export let codeups
+  import CodeupItem from './CodeupItem.svelte'
 </script>
 
 <section id="codeups">

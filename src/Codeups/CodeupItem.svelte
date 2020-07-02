@@ -1,43 +1,42 @@
 <script>
-import { createEventDispatcher } from 'svelte'
-import Button from '../UI/Button.svelte'
-import Badge from '../UI/Badge.svelte'
+  import { createEventDispatcher } from 'svelte'
+  import Button from '../UI/Button.svelte'
+  import Badge from '../UI/Badge.svelte'
 
-export let id
-export let title
-export let subtitle
-export let imageUrl
-export let description
-export let address
-export let email
-export let isFav
-const dispatch = createEventDispatcher()
+  export let id
+  export let title
+  export let subtitle
+  export let imageUrl
+  export let description
+  export let address
+  export let email
+  export let isFav
+  const dispatch = createEventDispatcher()
 
-function descLengthHandle() {
-  const wordLength = 10
-  description.split(' ')
-  console.log(description.length)
-  return description
-}
-
-// $: {
-//     const nb = 100
-//     if (description.length > nb)
-//     {
-//     description.length = nb
-//     description += '...'}
-
-//     console.log(description.length)
-//   }
-$: {let words = description.split(' ')
-    const nb = 25
-    if (words.length > nb){
-    words.length = nb
-    description = words.join(' ') + ' ...'}
-
-    console.log(words.length)
+  function descLengthHandle() {
+    const wordLength = 10
+    description.split(' ')
+    console.log(description.length)
+    return description
   }
 
+  // $: {
+  //     const nb = 100
+  //     if (description.length > nb)
+  //     {
+  //     description.length = nb
+  //     description += '...'}
+
+  //     console.log(description.length)
+  //   }
+  $: {let words = description.split(' ')
+      const nb = 25
+      if (words.length > nb){
+      words.length = nb
+      description = words.join(' ') + ' ...'}
+
+      console.log(words.length)
+    }
 
 </script>
 

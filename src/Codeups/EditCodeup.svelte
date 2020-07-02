@@ -92,7 +92,7 @@
       on:input={event => (email = event.target.value)} 
       label="Email" 
       value={email} 
-    controlType="email" />
+      controlType="email" />
     <TextInput 
       id=''
       valid={descValid} 

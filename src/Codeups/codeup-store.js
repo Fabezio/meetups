@@ -27,4 +27,29 @@ const codeups = writable([
   },
 ])
 
-export default codeups
+const customCodeupsStore = {
+  subscribe: codeups.subscribe,
+  addCodeup: codeupData => {
+    const newCodeup = {
+      ...codeupData,
+      id: Math.random().toString,
+      isFavorite: false
+    }
+    codeups.update(items => {
+      return [newCodeup, ...items]
+    })
+  },
+  toggleFavorite: (id) => {
+    codeups.update(items => {
+      const updatedCodeup = { ...items.find(el => el.id === id) }
+      updatedCodeup.isFavorite = !updatedCodeup.isFavorite
+      const codeupIndex = items.findIndex(el => el.id == id)
+      const updatedCodeups = [...items]
+      updatedCodeups[codeupIndex] = updatedCodeup
+      return updatedCodeups
+    }
+    )
+  }
+}
+
+export default customCodeupsStore

@@ -18,9 +18,12 @@
   {#if controlType == 'textarea'}
   <textarea class:invalid={!valid && touched} type="text" rows="3" bind:value on:input on:blur={() => touched = true } />
   {:else if controlType == 'email'}
-  <input class:invalid={!valid && touched} type="email" value={label} on:input on:blur={() => touched = true } />
+  <input class:invalid={!valid && touched} type="email" on:input 
+  on:blur={() => touched = true } />
   {:else}
-  <input class:invalvalue={!value && touched} type="text" value={label} on:input  on:blur={() => touched = true } />
+  <input class:invalid={!value && touched} type="text" 
+  
+  on:input on:blur={() => touched = true } />
   {/if}
   {#if validityMessage && !valid && touched}
     <p class="error-msg">{validityMessage}</p>
