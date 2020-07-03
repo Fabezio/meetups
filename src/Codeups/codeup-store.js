@@ -39,7 +39,7 @@ const customCodeupsStore = {
       return [newCodeup, ...items]
     })
   },
-  toggleFavorite: (id) => {
+  toggleFavorite: id => {
     codeups.update(items => {
       const updatedCodeup = { ...items.find(el => el.id === id) }
       updatedCodeup.isFavorite = !updatedCodeup.isFavorite

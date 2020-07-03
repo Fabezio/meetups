@@ -1,4 +1,6 @@
 <script>
+  import {createEventDispatcher} from 'svelte'
+
   import codeups from './codeup-store'
 
   import Button from '../UI/Button.svelte'
@@ -12,6 +14,8 @@
   export let address
   export let email
   export let isFav
+
+  const dispatch = createEventDispatcher()
 
   function toggleFavorite() {
     codeups.toggleFavorite(id)
@@ -59,7 +63,7 @@
   <footer>
     <Button href="mailto:{email}" >contact</Button>
     <!-- <a href="mailto:{email}">Contact</a> -->
-    <Button >show details</Button>
+    <Button on:click={() => dispatch('showdetails', id)} >show details</Button>
     <Button 
       mode="outline"
       color={isFav ? null : 'success'}

@@ -1,17 +1,23 @@
 <script>
 	// Modules
+	
 	import codeups from './Codeups/codeup-store'
-	import CodeupGrid from './Codeups/CodeupGrid.svelte'
-	import EditCodeup from './Codeups/EditCodeup.svelte'
-	import Detail from './Codeups/CodeupDetail.svelte'
+	import Grid from './Codeups/Grid.svelte'
+	import Edit from './Codeups/Edit.svelte'
+	import Detail from './Codeups/Detail.svelte'
 	import Header from './UI/Header.svelte'
 	import Button from './UI/Button.svelte'
 	import Modal from './UI/Modal.svelte'
 
 	// Variables
 	export let mainTitle;
+	let tabTitle = 'Codeups main mage'
+	let loadedCodeups = codeups
 	
 	let editMode
+	// export let id
+	let page = 'overview'
+	const pageData = {}
 
 	// Functions:
 	function addCodeup(event) {
@@ -20,33 +26,46 @@
 	}
 	function toggleFavorite(event) {
 		const id = event.detail
-		codeups.toggleFavorite(id)
+		loadedCodeups.toggleFavorite(id)
 	}
 	function cancelEdit () {
 		editMode = null
 	}
+	function showDetails (event) {
+		tabTitle = "detail"
+		page = 'details'
+		pageData.id = event.detail
+		return pageData.id
+		// console.log(pageData)
+	}
 
 	// Reactivity
 	$: console.log('welcome!')
+
 </script>
 
 <svelte:head>
-	<title>{mainTitle}</title>
+	<title>{tabTitle}</title>
 </svelte:head>
 
 <Header title={mainTitle} />
 
 <main>
-	<div id="codeup-controls">
-		<Button on:click={() => editMode = 'add' }>new codeup</Button>
-	</div>
-	<section>
-	{#if editMode === 'add'}
-	<EditCodeup on:save={addCodeup} on:cancel={cancelEdit} />
-	{:else}
-	<CodeupGrid codeups={$codeups} on:toggle-favorite={toggleFavorite} />
-	<Detail/>
+	{#if page === 'overview'}
+		<div id="codeup-controls">
+			<Button on:click={() => editMode = 'add' }>new codeup</Button>
+		</div>
+		{#if editMode === 'add'}
+			<Edit on:save={addCodeup} on:cancel={cancelEdit} />
+		{/if}
+			<Grid on:showdetails={showDetails} codeups={$loadedCodeups} />
+	{:else }
+		<Detail id={pageData.id} />
 	{/if}
+
+	
+
+	<section>
 	</section>
 	
 </main>
@@ -60,8 +79,8 @@
 		display: block;
 		text-align: center;
 	}
-	section {
+	/* section {
 		overflow-y: scroll;
-	}
+	} */
 	
 </style>

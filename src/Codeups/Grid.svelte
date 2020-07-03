@@ -1,11 +1,11 @@
 <script>
   export let codeups
-  import CodeupItem from './CodeupItem.svelte'
+  import Item from './Item.svelte'
 </script>
 
 <section id="codeups">
   {#each codeups as codeup}
-    <CodeupItem 
+    <Item 
       
       id={codeup.id}
       title={codeup.title} 
