@@ -1,5 +1,7 @@
 <script>
   import { createEventDispatcher } from 'svelte'
+  import codeups from './codeup-store'
+  
   import { isEmpty, isValidEmail } from '../helpers/validation'
   import TextInput from '../UI/TextInput.svelte'
   import Button from '../UI/Button.svelte'
@@ -23,14 +25,18 @@
   const dispatch = createEventDispatcher()
 
   function submitForm() {
-    dispatch('save', {
-      title,
-      subtitle,
-      description,
-      imageUrl,
-      email,
-      address
-    })
+    const codeupData = {
+			// id: event.detail.id,
+			title: title, 
+			subtitle: subtitle, 
+			description: description, 
+			imageUrl: imageUrl, 
+			address: address, 
+			contactEmail: email
+		}
+		
+		codeups.addCodeup(codeupData)
+    dispatch('save')
   } 
   function cancel () {
     dispatch('cancel')

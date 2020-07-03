@@ -8,7 +8,7 @@ const codeups = writable([
     description:
       "Because time is money, you will need to learn to be reaaaally efficiency",
     imageUrl:
-      "https://th.bing.com/th/id/OIP.6KmniewXDmmYxJRysPRDvAHaI6?pid=Api&w=149.4809688581315&h=180&c=7&dpr=1,3",
+      "svelte-wp.webp",
     address: "0001 CodeJS Road, MIT",
     contactEmail: "max.academind@dev-svelte.info",
     isFavorite: false,
@@ -20,7 +20,7 @@ const codeups = writable([
     description:
       "If you seek a backend webdev framework, Django is really cool!",
     imageUrl:
-      "https://humancoders-formations.s3.amazonaws.com/uploads/course/logo/3/formation-django.png",
+      "django-wp.png",
     address: "Monty street",
     contactEmail: "unchained-development@outlook.us",
     isFavorite: false,
@@ -47,8 +47,7 @@ const customCodeupsStore = {
       const updatedCodeups = [...items]
       updatedCodeups[codeupIndex] = updatedCodeup
       return updatedCodeups
-    }
-    )
+    })
   }
 }
 

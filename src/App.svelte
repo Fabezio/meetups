@@ -1,11 +1,12 @@
 <script>
 	// Modules
 	import codeups from './Codeups/codeup-store'
+	import CodeupGrid from './Codeups/CodeupGrid.svelte'
+	import EditCodeup from './Codeups/EditCodeup.svelte'
+	import Detail from './Codeups/CodeupDetail.svelte'
 	import Header from './UI/Header.svelte'
 	import Button from './UI/Button.svelte'
 	import Modal from './UI/Modal.svelte'
-	import CodeupGrid from './Codeups/CodeupGrid.svelte'
-	import EditCodeup from './Codeups/EditCodeup.svelte'
 
 	// Variables
 	export let mainTitle;
@@ -14,17 +15,7 @@
 
 	// Functions:
 	function addCodeup(event) {
-		const codeupData = {
-			// id: event.detail.id,
-			title: event.detail.title, 
-			subtitle: event.detail.subtitle, 
-			description: event.detail.description, 
-			imageUrl: event.detail.imageUrl, 
-			address: event.detail.address, 
-			contactEmail: event.detail.email
-		}
 		
-		codeups.addCodeup(codeupData)
 		editMode = null
 	}
 	function toggleFavorite(event) {
@@ -34,7 +25,6 @@
 	function cancelEdit () {
 		editMode = null
 	}
-	
 
 	// Reactivity
 	$: console.log('welcome!')
@@ -55,6 +45,7 @@
 	<EditCodeup on:save={addCodeup} on:cancel={cancelEdit} />
 	{:else}
 	<CodeupGrid codeups={$codeups} on:toggle-favorite={toggleFavorite} />
+	<Detail/>
 	{/if}
 	</section>
 	
@@ -67,13 +58,10 @@
 	#codeup-controls {
 		width: 100%;
 		display: block;
-		/* margin: O auto; */
 		text-align: center;
 	}
 	section {
 		overflow-y: scroll;
 	}
-
-	
 	
 </style>

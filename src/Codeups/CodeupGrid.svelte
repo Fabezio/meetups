@@ -1,4 +1,3 @@
-<!-- <h1>CodeupGrid</h1> -->
 <script>
   export let codeups
   import CodeupItem from './CodeupItem.svelte'
@@ -7,7 +6,7 @@
 <section id="codeups">
   {#each codeups as codeup}
     <CodeupItem 
-      on:toggle-favorite
+      
       id={codeup.id}
       title={codeup.title} 
       subtitle={codeup.subtitle} 
@@ -21,10 +20,8 @@
 </section>
 
 <style>
-#codeups {
-  /* 
-  */
-  margin: 0 auto; 
+  #codeups {
+    margin: 0 auto; 
 	}
 
 section {

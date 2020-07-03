@@ -1,19 +1,17 @@
-<span>
+<span id="fav">
   <slot />
 </span>
 
 <style>
-  span {
-    display: inline-block;
-    margin: 0 .25em;
-    padding: 0.125rem .25rem;
-    border-radius: 3px;
-    border: 1px solid #cf0056;
-    background: #cf0056;
+  #fav {
+    margin-left: .5rem;
+    padding: .25rem 0.5rem;
+    border-radius: 5px;
+    background: hsl(150, 100%, 50%);
     color: white;
-    font-family: 'Lato', sans-serif;
-    font-size: 0.8rem;
-    font-weight: 200;
-
+    font-size: 0.9rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    text-shadow: -0.5px -0.5px 1px hsl(210, 100%, 50%), 1px 1px 1px hsl(195, 100%, 50%);
   }
 </style>

@@ -1,5 +1,6 @@
 <script>
-  import { createEventDispatcher } from 'svelte'
+  import codeups from './codeup-store'
+
   import Button from '../UI/Button.svelte'
   import Badge from '../UI/Badge.svelte'
 
@@ -11,7 +12,10 @@
   export let address
   export let email
   export let isFav
-  const dispatch = createEventDispatcher()
+
+  function toggleFavorite() {
+    codeups.toggleFavorite(id)
+  }
 
   function descLengthHandle() {
     const wordLength = 10
@@ -20,15 +24,6 @@
     return description
   }
 
-  // $: {
-  //     const nb = 100
-  //     if (description.length > nb)
-  //     {
-  //     description.length = nb
-  //     description += '...'}
-
-  //     console.log(description.length)
-  //   }
   $: {let words = description.split(' ')
       const nb = 25
       if (words.length > nb){
@@ -45,7 +40,7 @@
     <h1 >
       {title}
       {#if isFav}
-      <Badge>&hearts;</Badge>
+      <Badge>favorite</Badge>
       {/if}
     </h1>
     <h2>{subtitle}</h2>
@@ -68,7 +63,7 @@
     <Button 
       mode="outline"
       color={isFav ? null : 'success'}
-      on:click={() => dispatch('toggle-favorite', id)} 
+      on:click={toggleFavorite} 
     >
       {isFav ? 'unfavorite' :'favorite' }
     </Button>
@@ -77,7 +72,7 @@
 </article>
 
 <style>
-  :root{--h-border: 2px ridge rgba(0,0,0,0.05);}
+  :root{--h-border: 1px ridge rgba(0,0,0,0.05);}
   article {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
     border-radius: 5px;
@@ -85,20 +80,13 @@
     margin: 1rem;
   }
   
-  /* .codeup {
-    grid-column: 1;
-    grid-row: 1;
-  } */
-
   header,
   .content,
   footer {
     padding: 1rem;
   }
   .content {
-    /* float: right; */
     min-height: 5rem;
-    /* overflow-y: scroll; */
   }
 
   .content p {
@@ -107,10 +95,9 @@
 
   .image {
     width: 100%;
-    height: 14rem;
+    height: 18rem;
     border-top: var(--h-border);
     border-bottom: var(--h-border);
-    
   }
 
   .image img {
@@ -126,12 +113,6 @@
     padding-top: 0.25em;
     padding-bottom: 0.25em;
     font-family: "Roboto Slab", sans-serif;
-  }
-
-  h1.is-favorite {
-    background: #01a129;
-    color: white;
-    border-radius: 5px;
   }
 
   h2 {
