@@ -1,7 +1,10 @@
 <script>
+  export let id
   export let value
+  export let rows = 3
   export let label
-  export let controlType = "input"
+  export let type
+  export let controlType = null
   export let valid = true
   export let validityMessage = ''
   
@@ -14,16 +17,22 @@
 </script>
 
 <div class="form-control">
-  <label for={value}>{label}: </label>
+  <label for={id}>{label}: </label>
   {#if controlType == 'textarea'}
-  <textarea class:invalid={!valid && touched} type="text" rows="3" bind:value on:input on:blur={() => touched = true } />
-  {:else if controlType == 'email'}
-  <input class:invalid={!valid && touched} type="email" on:input 
-  on:blur={() => touched = true } />
+    <textarea 
+      class:invalid={!valid && touched} 
+      {type} {rows} {id}
+      value={value} on:input 
+      on:blur={() => touched = true } 
+    />
   {:else}
-  <input class:invalid={!value && touched} type="text" 
-  
-  on:input on:blur={() => touched = true } />
+    <input 
+      class:invalid={!value && touched}
+      {type}
+      {id}
+      value={value}
+      on:input
+      on:blur={() => touched = true } />
   {/if}
   {#if validityMessage && !valid && touched}
     <p class="error-msg">{validityMessage}</p>

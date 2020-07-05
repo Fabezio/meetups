@@ -13,7 +13,7 @@
   let subtitle = ""
   let description = ""
   let imageUrl = ""
-  let email = ""
+  let contactEmail = ""
   let address = ""
 
   if (id) {
@@ -23,7 +23,7 @@
       subtitle = selectedCodeup.subtitle 
       description = selectedCodeup.description 
       imageUrl = selectedCodeup.imageUrl 
-      email = selectedCodeup.email 
+      contactEmail = selectedCodeup.contactEmail 
       address = selectedCodeup.address 
     })
     unsubscribe()
@@ -41,7 +41,7 @@
 			description: description, 
 			imageUrl: imageUrl, 
 			address: address, 
-			contactEmail: email
+			contactEmail: contactEmail
 		}
 		if(id) {
       codeups.updateCodeup(id, codeupData)
@@ -65,7 +65,7 @@
   //  /!\ email validation 
      _____
  */
-  $: emailValid = isValidEmail(email)
+  $: emailValid = isValidEmail(contactEmail)
   $: formIsValid = titleValid && subtitleValid && descValid && imgValid && addressValid && emailValid
 
 </script>
@@ -73,7 +73,8 @@
 <Modal title="Edit Codeup Data" on:cancel>
   <form on:submit|preventDefault={ submitForm } >
     <TextInput 
-      id=''
+      type='text'
+      id='title'
       value={title} 
       valid={titleValid} 
       validityMessage="Please enter a valid title" 
@@ -81,7 +82,8 @@
       label="Title" 
     />
     <TextInput 
-      id=''
+      type='text'
+      id='subtitle'
       value={subtitle} 
       valid={subtitleValid} 
       validityMessage="Please enter a valid subtitle" 
@@ -89,7 +91,8 @@
       label="Subtitle" 
     />
     <TextInput 
-      id=''
+      type='text'
+      id='address'
       value={address} 
       valid={addressValid} 
       validityMessage="Please enter a valid address" 
@@ -97,7 +100,8 @@
       label="Address" 
     />
     <TextInput 
-      id=''
+      type='text'
+      id='image'
       value={imageUrl} 
       valid={imgValid} 
       validityMessage="Please enter a valid path" 
@@ -105,20 +109,24 @@
       label="Image path"
       />
     <TextInput 
-      id=''
+      type='email'
+      id='email'
       valid={emailValid} 
       validityMessage="Please enter a valid email" 
-      on:input={event => (email = event.target.value)} 
       label="Email" 
-      value={email} 
-      controlType="email" />
+      value={contactEmail} 
+      on:input={event => (contactEmail = event.target.value)} 
+      />
     <TextInput 
-      id=''
+      type='text'
+      id='description'
       valid={descValid} 
       validityMessage="Please enter a valid description" 
-      bind:value={description}
       label="Description" 
-      controlType="textarea" />
+      controlType="textarea" 
+      value={description} 
+      on:input={event => (description = event.target.value)} 
+    />
   </form>
   <div slot="footer">
     <Button 
