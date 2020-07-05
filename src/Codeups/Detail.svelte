@@ -28,7 +28,7 @@
     <h2>{selectedCodeup.subtitle} {selectedCodeup.address}</h2>
     <p>{selectedCodeup.description}</p>
     <Button href="mailto:{selectedCodeup.contactEmail}" >contact</Button>
-    <Button on:click={() => dispatch('close')} mode="oulined">close</Button>
+    <Button type="button" mode='oulined' on:click={() => dispatch('close')} >close</Button>
 
   </div>
 </section>

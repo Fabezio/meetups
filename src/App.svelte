@@ -12,24 +12,28 @@
 	// Variables
 	export let mainTitle;
 	let tabTitle = 'Codeups main mage'
-	let loadedCodeups = codeups
+
+	// let codeups = codeups
 	
 	let editMode
+	let editedId
 	// export let id
 	let page = 'overview'
 	const pageData = {}
 
 	// Functions:
-	function addCodeup(event) {
-		
+	function savedCodeup(event) {
 		editMode = null
+		editedId = null
 	}
+		
 	function toggleFavorite(event) {
 		const id = event.detail
-		loadedCodeups.toggleFavorite(id)
+		codeups.toggleFavorite(id)
 	}
 	function cancelEdit () {
 		editMode = null
+		editedId = null
 	}
 	function showDetails (event) {
 		tabTitle = "detail"
@@ -37,6 +41,14 @@
 		pageData.id = event.detail
 		return pageData.id
 		// console.log(pageData)
+	}
+	function startEdit (event) {
+		editMode = 'edit'
+		editedId = event.detail
+	}
+	function closeDetails() {
+		page = 'overview'
+		pageData = {}
 	}
 
 	// Reactivity
@@ -53,14 +65,20 @@
 <main>
 	{#if page === 'overview'}
 		<div id="codeup-controls">
-			<Button on:click={() => editMode = 'add' }>new codeup</Button>
+			<Button on:click={() => editMode = 'edit' }>new codeup</Button>
 		</div>
-		{#if editMode === 'add'}
-			<Edit on:save={addCodeup} on:cancel={cancelEdit} />
+		{#if editMode === 'edit'}
+			<Edit 
+				id={editedId} on:save={savedCodeup} on:cancel={cancelEdit} 
+			/>
 		{/if}
-			<Grid on:showdetails={showDetails} codeups={$loadedCodeups} />
+			<Grid 
+				on:showdetails={showDetails} 
+				codeups={$codeups} 
+				on:edit={startEdit}
+			/>
 	{:else }
-		<Detail id={pageData.id} />
+		<Detail id={pageData.id} 	on:close={closeDetails} />
 	{/if}
 
 	

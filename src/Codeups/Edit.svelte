@@ -7,19 +7,28 @@
   import Button from '../UI/Button.svelte'
   import Modal from '../UI/Modal.svelte'
 
+  export let id = null
+
   let title = ""
-	let subtitle = ""
-	let description = ""
-	let imageUrl = ""
-	let email = ""
+  let subtitle = ""
+  let description = ""
+  let imageUrl = ""
+  let email = ""
   let address = ""
 
-  // let titleValid = false
-  // let subtitleValid = false
-  // let descValid = false
-  // let imgValid = false
-  // let emailValid = false
-  // let addressValid = false
+  if (id) {
+    const unsubscribe = codeups.subscribe(items => {
+      const selectedCodeup = items.find(i => i.id === id)
+      title = selectedCodeup.title 
+      subtitle = selectedCodeup.subtitle 
+      description = selectedCodeup.description 
+      imageUrl = selectedCodeup.imageUrl 
+      email = selectedCodeup.email 
+      address = selectedCodeup.address 
+    })
+    unsubscribe()
+  }
+
   let formIsValid = false
   
   const dispatch = createEventDispatcher()
@@ -34,10 +43,14 @@
 			address: address, 
 			contactEmail: email
 		}
-		
-		codeups.addCodeup(codeupData)
+		if(id) {
+      codeups.updateCodeup(id, codeupData)
+    } else {
+      codeups.addCodeup(codeupData)
+    }
     dispatch('save')
   } 
+
   function cancel () {
     dispatch('cancel')
   }
@@ -108,7 +121,12 @@
       controlType="textarea" />
   </form>
   <div slot="footer">
-    <Button mode="success" type="button" on:click={submitForm} disabled={!formIsValid} >save</Button>
+    <Button 
+      mode="success" 
+      type="button" 
+      on:click={submitForm} 
+      disabled={!formIsValid}
+     >save</Button>
     <Button color="outline" type="button" on:click={cancel}  >cancel</Button>
   </div>
   <!-- <span slot="\footer">alt footer</span> -->

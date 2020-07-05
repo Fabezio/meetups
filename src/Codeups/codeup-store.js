@@ -48,6 +48,15 @@ const customCodeupsStore = {
       updatedCodeups[codeupIndex] = updatedCodeup
       return updatedCodeups
     })
+  },
+  updateCodeup: (id, codeupData) => {
+    codeups.update(items => {
+      const codeupIndex = items.findIndex(i => i.id === id)
+      const updatedCodeup = { ...items[codeupIndex], ...codeupData }
+      const updatedCodeups = [...items]
+      updatedCodeups[codeupIndex] = updatedCodeup
+      return updatedCodeups
+    })
   }
 }
 

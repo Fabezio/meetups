@@ -15,6 +15,9 @@
       address={codeup.address} 
       email={codeup.contactEmail} 
       isFav={codeup.isFavorite}
+      on:edit
+      on:showdetails
+      on:close
     />
   {/each}
 </section>

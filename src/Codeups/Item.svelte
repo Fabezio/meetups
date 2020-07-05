@@ -61,8 +61,11 @@
   </body>
 
   <footer>
-    <Button href="mailto:{email}" >contact</Button>
+    <!-- <Button href="mailto:{email}" >contact</Button> -->
     <!-- <a href="mailto:{email}">Contact</a> -->
+    <Button mode='outline' type="button" on:click={() => dispatch('edit', id)} >
+      Edit
+    </Button>
     <Button on:click={() => dispatch('showdetails', id)} >show details</Button>
     <Button 
       mode="outline"
