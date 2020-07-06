@@ -1,5 +1,8 @@
 <script>
   import { createEventDispatcher } from 'svelte'
+  import { fly, slide } from 'svelte/transition'
+  import { flip } from 'svelte/animate'
+  
   import Item from './Item.svelte'
   import Filter from './Filter.svelte'
   import Button from '../UI/Button.svelte'
@@ -30,23 +33,25 @@
 </section>
 <section id="codeups">
   {#each filteredCodeups as codeup}
-    <Item 
+    <div
+      transition:fly
       
-      id={codeup.id}
-      title={codeup.title} 
-      subtitle={codeup.subtitle} 
-      description={codeup.description} 
-      imageUrl={codeup.imageUrl} 
-      address={codeup.address} 
-      email={codeup.contactEmail} 
-      isFavorite={codeup.isFavorite}
-      
-      on:edit
-      on:showdetails
-      on:close
-      
-      
-    />
+    >
+      <Item 
+        id={codeup.id}
+        title={codeup.title} 
+        subtitle={codeup.subtitle} 
+        description={codeup.description} 
+        imageUrl={codeup.imageUrl} 
+        address={codeup.address} 
+        email={codeup.contactEmail} 
+        isFavorite={codeup.isFavorite}
+        
+        on:edit
+        on:showdetails
+        on:close
+      />
+    </div>
   {/each}
 </section>
 

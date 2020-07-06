@@ -2,7 +2,7 @@ import { writable } from 'svelte/store'
 
 const codeups = writable([
   {
-    id: "m1",
+    id: "c1",
     title: "Hello!",
     subtitle: "Learn to code quickly",
     description:
@@ -11,10 +11,10 @@ const codeups = writable([
       "svelte-wp.webp",
     address: "0001 CodeJS Road, MIT",
     contactEmail: "max.academind@dev-svelte.info",
-    isFavorite: false,
+    isFavorite: true,
   },
   {
-    id: "m2",
+    id: "c2",
     title: "Pssst",
     subtitle: "Django is better",
     description:
@@ -23,6 +23,18 @@ const codeups = writable([
       "django-wp.png",
     address: "Monty street",
     contactEmail: "unchained-development@outlook.us",
+    isFavorite: false,
+  },
+  {
+    id: "c3",
+    title: "Angular",
+    subtitle: "A powerful framework",
+    description:
+      "Not so heavy, almost a giant one",
+    imageUrl:
+      "https://miro.medium.com/max/1400/1*ATk4P87sYInOVxABACMn3Q.jpeg",
+    address: "Typescript Avenue",
+    contactEmail: "simon@angularjs.info",
     isFavorite: false,
   },
 ])
