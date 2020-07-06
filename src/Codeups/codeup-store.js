@@ -49,6 +49,11 @@ const customCodeupsStore = {
       return updatedCodeups
     })
   },
+  removeCodeup: id => {
+    codeups.update(items => {
+      return items.filter(i => i.id !== id)
+    })
+  },
   updateCodeup: (id, codeupData) => {
     codeups.update(items => {
       const codeupIndex = items.findIndex(i => i.id === id)

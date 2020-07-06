@@ -1,10 +1,27 @@
 <script>
-  export let codeups
   import Item from './Item.svelte'
+  import Filter from './Filter.svelte'
+  export let codeups
+
+  let favsOnly = false
+  // let filteredCodeups
+
+
+  $: filteredCodeups = favsOnly ? codeups.filter(m => m.isFavorite) : codeups ;
+  // $:  console.log (codeups.isFavorite)
+      
+  function setFilter(event) {
+    return favsOnly = event.detail === 1
+    // console.log(favsOnly)
+  }
+  
 </script>
 
+<section id="codeups-controls">
+  <Filter on:select={setFilter} />
+</section>
 <section id="codeups">
-  {#each codeups as codeup}
+  {#each filteredCodeups as codeup}
     <Item 
       
       id={codeup.id}
@@ -14,10 +31,13 @@
       imageUrl={codeup.imageUrl} 
       address={codeup.address} 
       email={codeup.contactEmail} 
-      isFav={codeup.isFavorite}
+      isFavorite={codeup.isFavorite}
+      
       on:edit
       on:showdetails
       on:close
+      
+      
     />
   {/each}
 </section>
@@ -25,6 +45,9 @@
 <style>
   #codeups {
     margin: 0 auto; 
+	}
+  #codeups-controls {
+    margin: 1rem; 
 	}
 
 section {

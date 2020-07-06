@@ -1,7 +1,7 @@
 <script>
   import {createEventDispatcher} from 'svelte'
 
-  import codeups from './codeup-store'
+  import codeups from './codeup-store'  
 
   import Button from '../UI/Button.svelte'
   import Badge from '../UI/Badge.svelte'
@@ -13,7 +13,7 @@
   export let description
   export let address
   export let email
-  export let isFav
+  export let isFavorite
 
   const dispatch = createEventDispatcher()
 
@@ -43,7 +43,7 @@
   <header>
     <h1 >
       {title}
-      {#if isFav}
+      {#if isFavorite}
       <Badge>favorite</Badge>
       {/if}
     </h1>
@@ -69,11 +69,12 @@
     <Button on:click={() => dispatch('showdetails', id)} >show details</Button>
     <Button 
       mode="outline"
-      color={isFav ? null : 'success'}
+      color={isFavorite ? null : 'success'}
       on:click={toggleFavorite} 
     >
-      {isFav ? 'unfavorite' :'favorite' }
+      {isFavorite ? 'unfavorite' :'favorite' }
     </Button>
+    <!-- <Filter /> -->
   </footer>
   
 </article>

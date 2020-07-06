@@ -54,6 +54,10 @@
   function cancel () {
     dispatch('cancel')
   }
+  function deleteCodeup () {
+    codeups.removeCodeup(id)
+    dispatch('save')
+  }
 
   $: titleValid = !isEmpty(title)
   $: subtitleValid = !isEmpty(subtitle)
@@ -136,8 +140,10 @@
       disabled={!formIsValid}
      >save</Button>
     <Button color="outline" type="button" on:click={cancel}  >cancel</Button>
+    {#if id}
+      <Button on:click={deleteCodeup}>delete</Button>
+    {/if}
   </div>
-  <!-- <span slot="\footer">alt footer</span> -->
 </Modal>
 
 

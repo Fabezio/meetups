@@ -76,6 +76,7 @@
 				on:showdetails={showDetails} 
 				codeups={$codeups} 
 				on:edit={startEdit}
+				
 			/>
 	{:else }
 		<Detail id={pageData.id} 	on:close={closeDetails} />
