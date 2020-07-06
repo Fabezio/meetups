@@ -1,7 +1,13 @@
 <script>
+  import { createEventDispatcher } from 'svelte'
   import Item from './Item.svelte'
   import Filter from './Filter.svelte'
+  import Button from '../UI/Button.svelte'
+
+
+  const dispatch = createEventDispatcher()
   export let codeups
+  export let editMode
 
   let favsOnly = false
   // let filteredCodeups
@@ -17,8 +23,10 @@
   
 </script>
 
-<section id="codeups-controls">
+<section class="codeup-controls">
   <Filter on:select={setFilter} />
+  <Button on:click={() => dispatch('add') }>new codeup</Button>
+  
 </section>
 <section id="codeups">
   {#each filteredCodeups as codeup}
@@ -46,8 +54,14 @@
   #codeups {
     margin: 0 auto; 
 	}
-  #codeups-controls {
-    margin: 1rem; 
+  /* #codeups-controls {
+		width: 100%;
+		text-align: center;
+	} */
+  .codeup-controls {
+		display: flex;
+    padding: 1rem; 
+    justify-content: space-between;
 	}
 
 section {

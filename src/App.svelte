@@ -64,9 +64,7 @@
 
 <main>
 	{#if page === 'overview'}
-		<div id="codeup-controls">
-			<Button on:click={() => editMode = 'edit' }>new codeup</Button>
-		</div>
+		
 		{#if editMode === 'edit'}
 			<Edit 
 				id={editedId} on:save={savedCodeup} on:cancel={cancelEdit} 
@@ -76,7 +74,7 @@
 				on:showdetails={showDetails} 
 				codeups={$codeups} 
 				on:edit={startEdit}
-				
+				on:add={() => editMode = 'edit'}
 			/>
 	{:else }
 		<Detail id={pageData.id} 	on:close={closeDetails} />
@@ -93,11 +91,7 @@
 	main {
 		margin: 5em auto;
 	}
-	#codeup-controls {
-		width: 100%;
-		display: block;
-		text-align: center;
-	}
+	
 	/* section {
 		overflow-y: scroll;
 	} */
