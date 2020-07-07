@@ -20,6 +20,30 @@
 	// export let id
 	let page = 'overview'
 	const pageData = {}
+	let myUrl = 'https://codeups.firebaseio.com/codeups.json'
+
+	// fetch data
+
+	fetch(myUrl)
+	.then( res => {
+		if(!res.ok) throw new Error('Oops, Couldn\'t fetch data, please come back later...')
+		console.log('Data fetched on', myUrl)
+		return res.json()
+	})
+	.then( data => {
+		const loadedCodeups = []
+		for(const key in  data) {
+			loadedCodeups.push({
+				...data[key],
+				id: key
+			})
+		}
+		codeups.setCodeups(loadedCodeups)
+	})
+	.catch( err => {
+		console.log(err)
+	})
+
 
 	// Functions:
 	function savedCodeup(event) {
@@ -67,6 +91,7 @@
 		
 		{#if editMode === 'edit'}
 			<Edit 
+				{myUrl}
 				id={editedId} on:save={savedCodeup} on:cancel={cancelEdit} 
 			/>
 		{/if}

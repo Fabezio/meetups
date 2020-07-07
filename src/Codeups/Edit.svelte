@@ -8,6 +8,7 @@
   import Modal from '../UI/Modal.svelte'
 
   export let id = null
+  export let myUrl
 
   let title = ""
   let subtitle = ""
@@ -35,7 +36,7 @@
 
   function submitForm() {
     const codeupData = {
-			// id: event.detail.id,
+      // id: event.detail.id,
 			title: title, 
 			subtitle: subtitle, 
 			description: description, 
@@ -46,6 +47,29 @@
 		if(id) {
       codeups.updateCodeup(id, codeupData)
     } else {
+      fetch(myUrl, {
+        method: 'POST',
+        body: JSON.stringify({...codeupData, isFavorite: false}),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then( res => {
+        if(!res.ok) throw new Error('Oops, Problem! Try again...')
+        console.log('data sent to', myUrl)
+        return res.json()
+      })
+      .then( data => {
+        codeups.addCodeup({
+          ...codeupData,
+          isFavorite: false,
+          id: data.name
+        })
+        console.table(data)
+      })
+      .catch( err => {
+        console.log(err)
+      })
       codeups.addCodeup(codeupData)
     }
     dispatch('save')
@@ -59,6 +83,7 @@
     dispatch('save')
   }
 
+  $: console.log('address:', myUrl)
   $: titleValid = !isEmpty(title)
   $: subtitleValid = !isEmpty(subtitle)
   $: descValid = !isEmpty(description)

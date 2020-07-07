@@ -10,8 +10,9 @@
 
   const dispatch = createEventDispatcher()
   export let codeups
-  export let editMode
+  // export let editMode
 
+  
   let favsOnly = false
   // let filteredCodeups
 
