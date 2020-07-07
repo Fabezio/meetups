@@ -1,6 +1,6 @@
 <script>
   import { createEventDispatcher } from 'svelte'
-  import { fly, slide } from 'svelte/transition'
+  import { fly, slide , scale} from 'svelte/transition'
   import { flip } from 'svelte/animate'
   
   import Item from './Item.svelte'
@@ -34,7 +34,9 @@
 <section id="codeups">
   {#each filteredCodeups as codeup}
     <div
-      transition:fly
+      in:fly
+      out:scale
+      animation:flip={{duration: 1000}}
       
     >
       <Item 
@@ -82,6 +84,12 @@ section {
   section {
     grid-gap: 0;
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1200px) {
+  section {
+    grid-gap: 0;
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 

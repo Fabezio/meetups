@@ -1,4 +1,8 @@
-<span id="fav">
+<script>
+  import {slide} from 'svelte/transition'
+</script>
+
+<span transition:slide={{duration: 200}} id="fav">
   <slot />
 </span>
 
