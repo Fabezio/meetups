@@ -114,7 +114,7 @@
 
 <style>
 	main {
-		margin: 5em auto;
+		/* margin: 5em auto; */
 	}
 	
 	/* section {

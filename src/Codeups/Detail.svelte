@@ -27,19 +27,22 @@
     <h1>{selectedCodeup.title}</h1>
     <h2>{selectedCodeup.subtitle} {selectedCodeup.address}</h2>
     <p>{selectedCodeup.description}</p>
-    <Button href="mailto:{selectedCodeup.contactEmail}" >contact</Button>
-    <Button type="button" mode='oulined' on:click={() => dispatch('close')} >close</Button>
-
   </div>
+  <div class="footer">
+    <Button color="success" href="mailto:{selectedCodeup.contactEmail}" >Contact</Button>
+    <Button type="button" mode='oulined' on:click={() => dispatch('close')} >close</Button>
+  </div>
+
+    
 </section>
 
 <style>
   section {
-    margin-top: 4rem;
+    /* margin-top: 4rem; */
   }
   .image {
     width: 100%;
-    height: 25rem;
+    height: 600px;
     background: #e7e7e7;
   }
 
