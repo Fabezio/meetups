@@ -18,7 +18,20 @@
   const dispatch = createEventDispatcher()
 
   function toggleFavorite() {
-    codeups.toggleFavorite(id)
+    fetch(`https://codeups.firebaseio.com/codeups/${id}.json`, {
+        method: 'PATCH',
+        body: JSON.stringify({isFavorite: !isFavorite}),
+        headers: {
+          'Content-Type': 'application/json'
+       }
+      })
+      .then( res => {
+        if(!res.ok) throw new Error('Oops! Please try again.')
+        console.log(`data ${id} favorite option updated`)
+        // codeups.updateCodeup(id, codeupData)
+        codeups.toggleFavorite(id)
+      })
+      .catch ( err =>  console.log(err))
   }
 
   function descLengthHandle() {
