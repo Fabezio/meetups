@@ -37,7 +37,7 @@
 			})
 			setTimeout(() => {
 				isLoading = false
-				codeups.setCodeups(loadedCodeups)
+				codeups.setCodeups(loadedCodeups.reverse())
 				// codeups.setCodeups([])
 			}, 500 )
 		}
