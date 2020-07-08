@@ -19,5 +19,8 @@ body {
 }
 
 :root {
-    --red: #fc0056
+    --red: #fc0056;
+    --green: #01a129;
+    --blue: #01a1ff;
+    --rg: #FA5F2D;
 }

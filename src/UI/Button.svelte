@@ -31,6 +31,7 @@
     text-decoration: none;
     font-variant: small-caps;
     min-width: 8rem;
+    height: 2.5rem;
     /* text-transform: uppercase; */
   }
 

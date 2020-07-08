@@ -5,7 +5,7 @@
 
   import Button from '../UI/Button.svelte'
   import Badge from '../UI/Badge.svelte'
-  import Spinner from '../UI/LoadingSpinner.svelte'
+  import Spinner from '../UI/LoadingTinySpinner.svelte'
 
   export let id
   export let title
@@ -30,11 +30,16 @@
        }
       })
       .then( res => {
-        isLoading = false
+        // isLoading = false
         if(!res.ok) throw new Error('Oops! Please try again.')
         console.log(`data ${id} favorite option updated`)
-        // codeups.updateCodeup(id, codeupData)
+        	setTimeout(() => {
+				isLoading = false
+				// codeups.setCodeups(loadedCodeups.reverse())
         codeups.toggleFavorite(id)
+				// codeups.setCodeups([])
+			}, 500 )
+        // codeups.updateCodeup(id, codeupData)
       })
       .catch ( err =>  {
           loading = false
@@ -95,8 +100,8 @@
         on:click={toggleFavorite} 
       >
     {#if isLoading}
-      <!-- <Spinner /> -->
-      --updating--
+      <Spinner />
+      <!-- --updating-- -->
     {:else}
         {isFavorite ? 'unfavorite' :'favorite' }
     {/if}
