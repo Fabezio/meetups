@@ -45,7 +45,19 @@
 			contactEmail: contactEmail
 		}
 		if(id) {
-      codeups.updateCodeup(id, codeupData)
+      fetch(`https://codeups.firebaseio.com/codeups/${id}.json`, {
+        method: 'PATCH',
+        body: JSON.stringify(codeupData),
+        headers: {
+          'Content-Type': 'application/json'
+       }
+      })
+      .then( res => {
+        if(!res.ok) throw new Error('oh, no!')
+        console.log(`data ${id} updated`)
+        codeups.updateCodeup(id, codeupData)
+      })
+      .catch ( err =>  console.log(err))
     } else {
       fetch(myUrl, {
         method: 'POST',
