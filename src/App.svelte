@@ -8,6 +8,7 @@
 	import Button from './UI/Button.svelte'
 	import Modal from './UI/Modal.svelte'
 	import Spinner from './UI/LoadingSpinner.svelte'
+	import Error from './UI/Error.svelte'
 
 	// Variables
 	export let mainTitle;
@@ -18,6 +19,7 @@
 	const pageData = {}
 	let myUrl = 'https://codeups.firebaseio.com/codeups.json'
 	let isLoading = true
+	let error
 	// let codeups = codeups
 	// export let id
 
@@ -39,11 +41,12 @@
 				isLoading = false
 				codeups.setCodeups(loadedCodeups.reverse())
 				// codeups.setCodeups([])
-			}, 500 )
+			}, 100 )
 		}
 	})
 	.catch( err => {
 		isLoading = false
+		error = err
 		console.log(err)
 	})
 
@@ -75,6 +78,9 @@
 	function closeDetails() {
 		page = 'overview'
 		pageData = {}
+	}
+	function cancelError()  {
+		error = null
 	}
 
 	// Reactivity
@@ -109,6 +115,9 @@
 		{/if}
 	{:else }
 		<Detail id={pageData.id} 	on:close={closeDetails} />
+	{/if}
+	{#if error}
+		<Error message={error.message} on:cancel={cancelError} />
 	{/if}
 
 	
