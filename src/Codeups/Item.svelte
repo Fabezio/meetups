@@ -5,6 +5,7 @@
 
   import Button from '../UI/Button.svelte'
   import Badge from '../UI/Badge.svelte'
+  import Spinner from '../UI/LoadingSpinner.svelte'
 
   export let id
   export let title
@@ -14,10 +15,13 @@
   export let address
   export let email
   export let isFavorite
+  
+  let isLoading = false
 
   const dispatch = createEventDispatcher()
 
   function toggleFavorite() {
+    isLoading = true
     fetch(`https://codeups.firebaseio.com/codeups/${id}.json`, {
         method: 'PATCH',
         body: JSON.stringify({isFavorite: !isFavorite}),
@@ -26,12 +30,16 @@
        }
       })
       .then( res => {
+        isLoading = false
         if(!res.ok) throw new Error('Oops! Please try again.')
         console.log(`data ${id} favorite option updated`)
         // codeups.updateCodeup(id, codeupData)
         codeups.toggleFavorite(id)
       })
-      .catch ( err =>  console.log(err))
+      .catch ( err =>  {
+          loading = false
+          console.log(err)
+        })
   }
 
   function descLengthHandle() {
@@ -53,44 +61,52 @@
 </script>
 
 <article class="">
-  <header>
-    <h1 >
-      {title}
-      {#if isFavorite}
-      <Badge>favorite</Badge>
-      {/if}
-    </h1>
-    <h2>{subtitle}</h2>
-    <p>{address}</p>
-  </header> 
+    <header>
+      <h1 >
+        {title}
+        {#if isFavorite}
+        <Badge>favorite</Badge>
+        {/if}
+      </h1>
+      <h2>{subtitle}</h2>
+      <p>{address}</p>
+    </header> 
 
-  <body>
-    <div class="image">
-      <img src={imageUrl} alt={title}>
-    </div>
-    <div class="content">
-      <p>{description}</p>
-    </div>
-  </body>
+    <body>
+      <div class="image">
+        <img src={imageUrl} alt={title}>
+      </div>
+      <div class="content">
+        <p>{description}</p>
+      </div>
+    </body>
 
-  <footer>
-    <!-- <Button href="mailto:{email}" >contact</Button> -->
-    <!-- <a href="mailto:{email}">Contact</a> -->
-    <Button mode='outline' type="button" on:click={() => dispatch('edit', id)} >
-      Edit
-    </Button>
-    <Button on:click={() => dispatch('showdetails', id)} >show details</Button>
-    <Button 
-      mode="outline"
-      color={isFavorite ? null : 'success'}
-      on:click={toggleFavorite} 
-    >
-      {isFavorite ? 'unfavorite' :'favorite' }
-    </Button>
-    <!-- <Filter /> -->
-  </footer>
-  
-</article>
+    <footer>
+      <!-- <Button href="mailto:{email}" >contact</Button> -->
+      <!-- <a href="mailto:{email}">Contact</a> -->
+      <Button mode='outline' type="button" on:click={() => dispatch('edit', id)} >
+        Edit
+      </Button>
+      <Button on:click={() => dispatch('showdetails', id)} >show details</Button>
+      
+      <Button 
+        mode="outline"
+        color={isFavorite ? null : 'success'}
+        on:click={toggleFavorite} 
+      >
+    {#if isLoading}
+      <!-- <Spinner /> -->
+      --updating--
+    {:else}
+        {isFavorite ? 'unfavorite' :'favorite' }
+    {/if}
+      </Button>
+      <!-- <Filter /> -->
+    </footer>
+    
+
+  </article>
+
 
 <style>
   :root{--h-border: 1px ridge rgba(0,0,0,0.05);}
@@ -150,4 +166,8 @@
   div {
     text-align: right;
   }
+  /* .fav-button {
+    display: inline;
+    max-width: 30rem;
+  } */
 </style>

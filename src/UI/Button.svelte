@@ -30,6 +30,7 @@
     cursor: pointer;
     text-decoration: none;
     font-variant: small-caps;
+    min-width: 8rem;
     /* text-transform: uppercase; */
   }
 
