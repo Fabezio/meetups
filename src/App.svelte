@@ -37,9 +37,9 @@
 			})
 			setTimeout(() => {
 				isLoading = false
-				// codeups.setCodeups(loadedCodeups)
-				codeups.setCodeups([])
-			}, 1000 )
+				codeups.setCodeups(loadedCodeups)
+				// codeups.setCodeups([])
+			}, 500 )
 		}
 	})
 	.catch( err => {
