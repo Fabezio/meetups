@@ -48,8 +48,8 @@
   button:hover,
   button:active,
   .active {
-    background: #cf0056;
-    border-color: #cf0056;
+    background: var(--red);
+    border-color: var(--red);
     color: white;
   }
 

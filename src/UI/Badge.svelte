@@ -11,7 +11,7 @@
     margin-left: .5rem;
     padding: .25rem 0.5rem;
     border-radius: 5px;
-    background: #cf0056;
+    background: var(--red);
     color: white;
     font-size: 0.9rem;
     font-weight: 400;

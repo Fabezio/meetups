@@ -21,8 +21,8 @@
   button,
   a {
     font: inherit;
-    border: 1px solid #cf0056;
-    background: #cf0056;
+    border: 1px solid var(--red);
+    background: var(--red);
     padding: 0.5rem 1rem;
     color: white;
     border-radius: 5px;
@@ -69,7 +69,7 @@
 
   .outline {
     background: transparent;
-    color: #cf0056;
+    color: var(--red);
     box-shadow: none;
   }
 

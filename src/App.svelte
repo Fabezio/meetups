@@ -1,6 +1,5 @@
 <script>
 	// Modules
-	
 	import codeups from './Codeups/codeup-store'
 	import Grid from './Codeups/Grid.svelte'
 	import Edit from './Codeups/Edit.svelte'
@@ -8,22 +7,21 @@
 	import Header from './UI/Header.svelte'
 	import Button from './UI/Button.svelte'
 	import Modal from './UI/Modal.svelte'
+	import Spinner from './UI/LoadingSpinner.svelte'
 
 	// Variables
 	export let mainTitle;
 	let tabTitle = 'Codeups main mage'
-
-	// let codeups = codeups
-	
 	let editMode
 	let editedId
-	// export let id
 	let page = 'overview'
 	const pageData = {}
 	let myUrl = 'https://codeups.firebaseio.com/codeups.json'
+	let isLoading = true
+	// let codeups = codeups
+	// export let id
 
 	// fetch data
-
 	fetch(myUrl)
 	.then( res => {
 		if(!res.ok) throw new Error('Oops, Couldn\'t fetch data, please come back later...')
@@ -37,13 +35,17 @@
 				...data[key],
 				id: key
 			})
+			setTimeout(() => {
+				isLoading = false
+				// codeups.setCodeups(loadedCodeups)
+				codeups.setCodeups([])
+			}, 1000 )
 		}
-		codeups.setCodeups(loadedCodeups)
 	})
 	.catch( err => {
+		isLoading = false
 		console.log(err)
 	})
-
 
 	// Functions:
 	function savedCodeup(event) {
@@ -95,12 +97,16 @@
 				id={editedId} on:save={savedCodeup} on:cancel={cancelEdit} 
 			/>
 		{/if}
+		{#if isLoading}
+			<Spinner />
+		{:else}
 			<Grid 
 				on:showdetails={showDetails} 
 				codeups={$codeups} 
 				on:edit={startEdit}
 				on:add={() => editMode = 'edit'}
 			/>
+		{/if}
 	{:else }
 		<Detail id={pageData.id} 	on:close={closeDetails} />
 	{/if}

@@ -32,6 +32,9 @@
   <Button on:click={() => dispatch('add') }>new codeup</Button>
   
 </section>
+{#if filteredCodeups.length === 0}
+  <p id="no-codeup">No data yet, you may start adding some</p>
+{/if}
 <section id="codeups">
   {#each filteredCodeups as codeup}
     <div
@@ -62,6 +65,9 @@
   #codeups {
     margin: 0 auto; 
 	}
+  #no-codeup {
+    margin: 1rem;
+  }
   /* #codeups-controls {
 		width: 100%;
 		text-align: center;

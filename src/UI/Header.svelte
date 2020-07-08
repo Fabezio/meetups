@@ -14,7 +14,7 @@ header {
 	top: 0;
 	left: 0;
 	height: 4em;
-	background: #cf0056;
+	background: var(--red);
 	display: flex;
 	justify-content: center;
 	align-items: center;
