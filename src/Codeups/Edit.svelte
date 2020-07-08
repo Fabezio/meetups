@@ -91,7 +91,15 @@
     dispatch('cancel')
   }
   function deleteCodeup () {
-    codeups.removeCodeup(id)
+    fetch(`https://codeups.firebaseio.com/codeups/${id}.json`, {
+        method: 'DELETE'
+      })
+      .then( res => {
+        if(!res.ok) throw new Error('Oops! Please try again.')
+        console.log(`data ${id} deleted`)
+        codeups.removeCodeup(id)
+      })
+      .catch ( err =>  console.log(err))
     dispatch('save')
   }
 
