@@ -2,13 +2,55 @@
   import { createEventDispatcher } from 'svelte'
   import codeups from './codeup-store'
   
-  import { isEmpty, isValidEmail } from '../helpers/validation'
+  import { isEmpty, isValidEmail, onMount } from '../helpers/validation'
   import TextInput from '../UI/TextInput.svelte'
   import Button from '../UI/Button.svelte'
   import Modal from '../UI/Modal.svelte'
 
   export let id = null
   export let myUrl
+  const updateMounted = onMount(()=>{
+    fetch(`https://codeups.firebaseio.com/codeups/${id}.json`, {
+        method: 'PATCH',
+        body: JSON.stringify(codeupData),
+        headers: {
+          'Content-Type': 'application/json'
+       }
+      })
+      .then( res => {
+        if(!res.ok) throw new Error('oh, no!')
+        console.log(`data ${id} updated`)
+        codeups.updateCodeup(id, codeupData)
+      })
+      .catch ( err =>  console.log(err))
+  })
+  const addCodeupMounted = (() => {
+
+      fetch(myUrl, {
+        method: 'POST',
+        body: JSON.stringify({...codeupData, isFavorite: false}),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then( res => {
+        if(!res.ok) throw new Error('Oops, Problem! Try again...')
+        console.log('data sent to', myUrl)
+        return res.json()
+      })
+      .then( data => {
+        codeups.addCodeup({
+          ...codeupData,
+          isFavorite: false,
+          id: data.name
+        })
+        console.table(data)
+      })
+      .catch( err => {
+        console.log(err)
+      })
+      codeups.addCodeup(codeupData)
+  })
 
   let title = ""
   let subtitle = ""
@@ -45,44 +87,10 @@
 			contactEmail: contactEmail
 		}
 		if(id) {
-      fetch(`https://codeups.firebaseio.com/codeups/${id}.json`, {
-        method: 'PATCH',
-        body: JSON.stringify(codeupData),
-        headers: {
-          'Content-Type': 'application/json'
-       }
-      })
-      .then( res => {
-        if(!res.ok) throw new Error('oh, no!')
-        console.log(`data ${id} updated`)
-        codeups.updateCodeup(id, codeupData)
-      })
-      .catch ( err =>  console.log(err))
+      updateMounted()
+      
     } else {
-      fetch(myUrl, {
-        method: 'POST',
-        body: JSON.stringify({...codeupData, isFavorite: false}),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-      .then( res => {
-        if(!res.ok) throw new Error('Oops, Problem! Try again...')
-        console.log('data sent to', myUrl)
-        return res.json()
-      })
-      .then( data => {
-        codeups.addCodeup({
-          ...codeupData,
-          isFavorite: false,
-          id: data.name
-        })
-        console.table(data)
-      })
-      .catch( err => {
-        console.log(err)
-      })
-      codeups.addCodeup(codeupData)
+      addCodeupMounted()
     }
     dispatch('save')
   } 

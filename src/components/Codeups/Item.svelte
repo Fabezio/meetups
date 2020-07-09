@@ -1,5 +1,5 @@
 <script>
-  import {createEventDispatcher} from 'svelte'
+  import {createEventDispatcher, onMount} from 'svelte'
 
   import codeups from './codeup-store'  
 
@@ -18,10 +18,7 @@
   
   let isLoading = false
 
-  const dispatch = createEventDispatcher()
-
-  function toggleFavorite() {
-    isLoading = true
+  const mounted = onMount(() => {
     fetch(`https://codeups.firebaseio.com/codeups/${id}.json`, {
         method: 'PATCH',
         body: JSON.stringify({isFavorite: !isFavorite}),
@@ -45,6 +42,14 @@
           loading = false
           console.log(err)
         })
+  })
+
+  const dispatch = createEventDispatcher()
+
+  function toggleFavorite() {
+    isLoading = true
+    mounted()
+    
   }
 
   function descLengthHandle() {
